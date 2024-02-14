@@ -1,0 +1,75 @@
+//variable in sass start with a dollar sign and can be used 
+$maincolor: hotpink;  
+
+// mixins are a collections of rules that can be applied 
+@mixin hot-pink-black-letters {
+    background-color: $maincolor;
+    color: black;
+    border: 1px solid black
+}
+
+
+
+//to use mixins, use the @include keyword followed by the name of the mixin
+h1{
+@include hot-pink-black-letters;
+}
+
+//we can also use nesting for example. the below means i want to target every h2 that has a div as a parent.
+//so for those h2's my background color will be aquamarine
+div{
+    h2{
+        background-color: aquamarine;
+    }
+}
+
+// & is used for chain selection
+// this will make only the 'submit' buttons pink and not
+div{
+    input{
+        font-size: 20px;
+        background-color: aqua;
+        &[type='submit']{
+            background-color: hotpink;
+            &:hover{
+                background-color: red;
+            }
+        }
+    }
+}
+
+
+// while-loop
+/* Will output the following CSS:
+
+.col-4 {
+    width: 80px;
+    left: 240px;
+}
+
+.col-3 {
+    width: 80px;
+    left: 160px;
+}
+
+.col-2 {
+    width: 80px;
+    left: 80px;
+}
+
+.col-1 {
+    width: 80px;
+    left: 0px;
+} */
+
+$columns: 4;
+$column-width: 80px;
+
+@while $columns > 0 {
+    .col-#{$columns} {
+        width: $column-width;
+        left: $column-width * ($columns - 1);
+    }
+
+    $columns: $columns - 1;
+}
